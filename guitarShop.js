@@ -1,30 +1,63 @@
-class ClassicGuitar {
-  constructor(manufactureYear, brand, price, numberOfString, used) {
-    this.manufactureYear = manufactureYear;
-    this.brand = brand;
-    this.price = price;
-    this.numberOfString = numberOfString;
-    this.used = used;
-  }
+// class ClassicGuitar {
+//   constructor(manufactureYear, brand, price, numberOfString, used) {
+//     this.manufactureYear = manufactureYear;
+//     this.brand = brand;
+//     this.price = price;
+//     this.numberOfString = numberOfString;
+//     this.used = used;
+//   }
 
-  play() {
-    this.price *= 0.9;
-    return "🎶🎶🎶";
-  }
+//   constructor(manufactureYear, brand, price) {
+//     this.manufactureYear = manufactureYear;
+//     this.brand = brand;
+//     this.price = price;
+//     this.numberOfString = 6;
+//     this.used = false;
+//   }
 
-  getManufactureYear() {
-    return this.manufactureYear;
-  }
+//   //Methods
+//   play() {
+//     this.price *= 0.9;
+//     return "🎶🎶🎶";
+//   }
 
-  getBrand() {
-    return this.brand;
-  }
+//   getManufactureYear() {
+//     return this.manufactureYear;
+//   }
 
-  getPrice() {
-    return this.price;
-  }
+//   getBrand() {
+//     return this.brand;
+//   }
 
-  setPrice(newPrice) {
-    this.price = newPrice;
-  }
+//   getPrice() {
+//     return this.price;
+//   }
+
+//   setPrice(newPrice) {
+//     this.price = newPrice;
+//   }
+
+//   static detectSound(sound) {
+//     switch (sound) {
+//       case "🎶":
+//         return "ClassicGuitar";
+//       case "🎸":
+//         return "ElectricGuitar";
+//       case "🔊":
+//         return "BassGuitar";
+//       default:
+//         return "Not a guitar";
+//     }
+//   }
+// }
+
+// Creating an object using the ClassicGuitar constructor
+let classicGuitar1 = new ClassicGuitar(manufactureYear, brand, price);
+
+function ClassicGuitar(manufactureYear, brand, price) {
+  this.manufactureYear = manufactureYear;
+  this.brand = brand;
+  this.price = price;
+  this.numberOfString = 6;
+  this.used = false;
 }
