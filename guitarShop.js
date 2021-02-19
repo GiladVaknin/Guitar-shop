@@ -52,8 +52,6 @@
 // }
 
 // Creating an object using the ClassicGuitar constructor
-// let classicGuitar1 = new ClassicGuitar(manufactureYear, brand, price);
-
 function ClassicGuitar(manufactureYear, brand, price) {
   this.manufactureYear = manufactureYear;
   this.brand = brand;
@@ -81,18 +79,47 @@ function ClassicGuitar(manufactureYear, brand, price) {
   this.setPrice = function (newPrice) {
     this.price = newPrice;
   };
-}
-function detectSound(sound) {
-  switch (sound) {
-    case "🎶":
-      return "ClassicGuitar";
-    case "🎸":
-      return "ElectricGuitar";
-    case "🔊":
-      return "BassGuitar";
-    default:
-      return "Not a guitar";
+
+  function detectSound(sound) {
+    switch (sound) {
+      case "🎶":
+        return "ClassicGuitar";
+      case "🎸":
+        return "ElectricGuitar";
+      case "🔊":
+        return "BassGuitar";
+      default:
+        return "Not a guitar";
+    }
   }
 }
 
-const cg1 = new ClassicGuitar("`1983", "yamaha", 800);
+function ElectricGuitar(manufactureYear, brand, price, longNeck) {
+  ClassicGuitar.call(this, manufactureYear, brand, price);
+  this.longNeck = longNeck;
+  this.play = function () {
+    return "🎸🎸🎸";
+  };
+}
+
+const EG = new ElectricGuitar("2000", "yamaha", 900, true);
+// let classicGuitar1 = new ClassicGuitar(manufactureYear, brand, price);
+
+function BassGuitar(manufactureYear, brand, price) {
+  ClassicGuitar.call(this, manufactureYear, brand, price);
+  this.play = function () {
+    return "🔊🔊🔊";
+  };
+  this.numberOfString = 4;
+  this.plySolo = function () {
+    let emojisArr = ["💥", "🤘", "🎵", "📢", "💢", "🕺"];
+    let;
+  };
+}
+function getProtos({ __proto__ }) {
+  if (!(__proto__ === null)) {
+    return [__proto__.constructor.name, ...getProtos(__proto__)];
+  } else {
+    return [];
+  }
+}
