@@ -58,68 +58,91 @@ function ClassicGuitar(manufactureYear, brand, price) {
   this.price = price;
   this.numberOfString = 6;
   this.used = false;
-
-  this.play = function () {
-    this.price *= 0.9;
-    return "🎶🎶🎶";
-  };
-
-  this.getManufactureYear = function () {
-    return this.manufactureYear;
-  };
-
-  this.getBrand = function () {
-    return this.brand;
-  };
-
-  this.getPrice = function () {
-    return this.price;
-  };
-
-  this.setPrice = function (newPrice) {
-    this.price = newPrice;
-  };
-
-  function detectSound(sound) {
-    switch (sound) {
-      case "🎶":
-        return "ClassicGuitar";
-      case "🎸":
-        return "ElectricGuitar";
-      case "🔊":
-        return "BassGuitar";
-      default:
-        return "Not a guitar";
-    }
-  }
 }
+
+ClassicGuitar.prototype.play = function () {
+  this.price *= 0.9;
+  return "🎶🎶🎶";
+};
+
+ClassicGuitar.prototype.getManufactureYear = function () {
+  return this.manufactureYear;
+};
+
+ClassicGuitar.prototype.getBrand = function () {
+  return this.brand;
+};
+
+ClassicGuitar.prototype.getPrice = function () {
+  return this.price;
+};
+
+ClassicGuitar.prototype.setPrice = function (newPrice) {
+  this.price = newPrice;
+};
+
+ClassicGuitar.prototype.detectSound = function (sound) {
+  switch (sound) {
+    case "🎶":
+      return "ClassicGuitar";
+    case "🎸":
+      return "ElectricGuitar";
+    case "🔊":
+      return "BassGuitar";
+    default:
+      return "Not a guitar";
+  }
+};
 
 function ElectricGuitar(manufactureYear, brand, price, longNeck) {
   ClassicGuitar.call(this, manufactureYear, brand, price);
   this.longNeck = longNeck;
-  this.play = function () {
-    return "🎸🎸🎸";
-  };
 }
 
-const EG = new ElectricGuitar("2000", "yamaha", 900, true);
-// let classicGuitar1 = new ClassicGuitar(manufactureYear, brand, price);
+ElectricGuitar.prototype = Object.create(ClassicGuitar.prototype);
+ElectricGuitar.prototype.constructor = ElectricGuitar;
+
+ElectricGuitar.prototype.play = function () {
+  return "🎸🎸🎸";
+};
 
 function BassGuitar(manufactureYear, brand, price) {
   ClassicGuitar.call(this, manufactureYear, brand, price);
-  this.play = function () {
-    return "🔊🔊🔊";
-  };
   this.numberOfString = 4;
-  this.plySolo = function () {
-    let emojisArr = ["💥", "🤘", "🎵", "📢", "💢", "🕺"];
-    let;
-  };
 }
-function getProtos({ __proto__ }) {
-  if (!(__proto__ === null)) {
-    return [__proto__.constructor.name, ...getProtos(__proto__)];
-  } else {
-    return [];
+
+BassGuitar.prototype = Object.create(ClassicGuitar.prototype);
+BassGuitar.prototype.constructor = BassGuitar;
+
+BassGuitar.prototype.play = function () {
+  return "🔊🔊🔊";
+};
+
+BassGuitar.prototype.plySolo = function () {
+  let emojiesArr = ["💥", "🤘", "🎵", "📢", "💢", "🕺"];
+  let usedEmojies = [];
+  let solo = "";
+  for (let i = 0; i < 6; i++) {
+    let rnd = Math.floor(Math.random() * 6);
+    if (usedEmojies.includes(rnd)) {
+      rnd = Math.floor(Math.random() * 6);
+    } else {
+      usedEmojies.push(rnd);
+      solo += emojiesArr[rnd];
+    }
   }
-}
+  return solo;
+};
+
+const getProtos = ({ __proto__: prt }) =>
+  !(prt === null) ? [prt.constructor.name, ...getProtos(prt)] : [];
+
+let bg = new BassGuitar("2000", "yamaha", 900, true);
+const eg = new ElectricGuitar("2000", "yamaha", 900, true);
+let cg1 = new ClassicGuitar("2331", "korg", 250);
+
+console.log(bg);
+console.log(eg);
+console.log(cg1);
+
+console.log(getProtos(eg));
